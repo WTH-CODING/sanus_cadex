@@ -81,7 +81,10 @@ def brainmodel_predict(img_path, model):
     preds = model.predict(images, batch_size=16)
     return preds
 
-
+@app.route('/', methods=['GET'])
+def homepage():
+    # Main page
+    return render_template('base/index.html')
 
 @app.route('/pneumonia/', methods=['GET'])
 def pneumonia():
