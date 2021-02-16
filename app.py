@@ -274,6 +274,14 @@ def brainupload():
             return "Warning! This image is tumorous."
     return None
 
+    @app.route("/brainTumor/test" ,methods=['GET'])
+    def brain():
+    # Main page
+        return render_template('brain/index.html')
+
+    @app.route('/brainTumor/predict', meth0ds=['GET', 'POST'])
+    def brainTumor(): 
+        return None
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
