@@ -6,7 +6,7 @@ import re
 import numpy as np
 import joblib
 import cv2
-from watershed_algo.py import watershed
+from watershed_algo import watershed
 from PIL import Image, ImageOps
 
 from werkzeug.utils import secure_filename
@@ -16,6 +16,7 @@ from keras.models import load_model as kl
 from tensorflow.keras.preprocessing import image
 from tensorflow.python.keras.applications.vgg16 import preprocess_input
 from flask import Flask, redirect, url_for, request, render_template
+import tensorflow as tf
 
 
 # Define a flask app
@@ -83,10 +84,10 @@ np.set_printoptions(suppress=True)
 #     preds = model.predict(images, batch_size=16)
 #     return preds
 
-@app.route('/', methods=['GET'])
-def homepage():
-    # Main page
-    return render_template('base/index.html')
+# @app.route('/', methods=['GET'])
+# def homepage():
+#     # Main page
+#     return render_template('base/index.html')
 
 # @app.route('/pneumonia/', methods=['GET'])
 # def pneumonia():
@@ -246,10 +247,10 @@ def homepage():
 #     print(class1,class2,class3)
 #     return render_template("skin/result.html",image_name=filename,class1=class1,class2=class2,class3=class3)
 
-# @app.route("/brain/test" ,methods=['GET'])
-# def brain():
-#     # Main page
-#     return render_template('brain/index.html')
+@app.route("/brain/test" ,methods=['GET'])
+def brain():
+    # Main page
+    return render_template('brain/index.html')
 
 # @app.route('/brain/predict', methods=['GET', 'POST'])
 # def brainupload():
@@ -276,14 +277,14 @@ def homepage():
 #             return "Warning! This image is tumorous."
 #     return None
 
-    @app.route("/brainTumor/test" ,methods=['GET'])
-    def brain():
-    # Main page
-        return render_template('brain/index.html')
+# @app.route('/brain/test' ,methods=['GET'])
+# def brain():
+#     # Main page
+#     return render_template('brain/index.html')
 
-    @app.route('/brainTumor/predict', meth0ds=['GET', 'POST'])
-    def brainTumor(): 
-            target = os.path.join(APP_ROOT, 'images/')
+@app.route('/brain/predict', methods=['GET', 'POST'])
+def brainTumor(): 
+    target = os.path.join(APP_ROOT, 'images/')
     print(target)
     if not os.path.isdir(target):
             os.mkdir(target)
@@ -299,7 +300,7 @@ def homepage():
         print ("Save it to:", destination)
         upload.save(destination)
     # Load the model
-    model = tensorflow.keras.models.load_model('./model/Best_Model.h5',compile=False)
+    model = tf.keras.models.load_model('./model/Best_Model.h5',compile=False)
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     # Replace this with the path to your image
@@ -331,18 +332,22 @@ def homepage():
 
     # run the inference
     prediction = model.predict(data)
-    watershed(image)
+    # watershed(ex)
     #print(type(prediction))
     prediction = list(prediction)
 
     print(prediction)
-    # print(prediction[0][0])
-    # print(prediction[0][1])
     class1=round(prediction[0][0]*100,2)
-    class2=round(prediction[0][1]*100,2)
-    #class3=round(prediction[0][2]*100,2)
+    class2=round(prediction[0][1]*100,2)    
+    img = watershed(ex)
+    print(filename)
     print(class1,class2)
-    return render_template("complete_display_image.html",image_name=filename,class1=class1,class2=class2)
+    # if class1 < 90:
+    #     return "This image is NOT Tumorous."
+    # elif class1 >= 90:  # Convert to string
+    #     return "Warning! This image is tumorous. Scan is "+ str(class1) +"% tumorous and "+ str(class2) +"% non-tumorous"
+    return render_template("brain/result.html",image_name=filename,class1=class1,class2=class2)    
+    # return render_template("complete_display_image.html",image_name=filename,class1=class1,class2=class2)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+from PIL import Image
 
 def watershed(fileName):
     img = cv.imread(fileName,1)
@@ -19,6 +20,10 @@ def watershed(fileName):
     markers = cv.watershed(Img, markers)
     Img[markers == -1] = [255, 0, 0]
     tumorImage = cv.cvtColor(Img, cv.COLOR_HSV2BGR)
-    cv.imshow('tumor_image',tumorImage)
-    k=cv.waitKey(0)
-    cv.destroyAllWindows()
+    ws = Image.fromarray(tumorImage, 'RGB')
+    ws.save("static/"+ str(fileName.split("/")[-1]))
+    # ws.show()
+    # return ws
+    # cv.imshow('tumor_image',tumorImage)
+    # k=cv.waitKey(0)
+    # cv.destroyAllWindows()

@@ -7,7 +7,8 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <link href="{{ url_for('static', filename='skin/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='skin/vendor/2221mb/neumorphism.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='skin/css/custom.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='skin/css/custom2.css') }}" rel="stylesheet" />
+    
 
 
     <title>JAAGRAT</title>
@@ -69,7 +70,11 @@
                 <div class="card bg-primary shadow-inset border-light text-center">
                     <div class="card-header">
                         <div class="profile-image bg-primary shadow-inset border border-light rounded mx-auto p-3 mt-n6">
-                            <div id="imagePreview"></div>
+                            <div id="imagePreview">
+                            <div id="prev" style="height: 100%;width: 100%;">
+                            <img src=" {{url_for('static', filename=image_name )}}" style="height: 100%;width: 100%;">
+                        </div>
+                        </div>
                         </div>
                     </div>
                     <div class="card-body pb-5">
@@ -97,21 +102,35 @@
             <div class="w-100 card bg-primary shadow-soft border-light text-left mb-4 mb-md-0">
                 <div class="card-body p-4 p-sm-5">
                     <div class="d-flex px-3">
-                        <div>
-                            <div class="icon icon-shape shadow-soft rounded-circle">
-                                <span class="far fa-list-alt"></span>
-                            </div>
-                        </div>
                         <div class="pl-3 pl-sm-4 text-center">
                             <h3 class="h5">Result:</h3>
-                            <h2 class="text-success" id="result"></h2>
-                            <h2 class="text-success" id="preresult">Scan Now</h2>
+                            <h3 class="text-success" id="result"></h3>
+                            
+                            <h3>Tumorous prediction</strong></h3>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style= "{{"width:" ~ class1 ~"% ; animation: 5s ease 0s 1 normal none running animate-positive"}}", opacity: "1"}}></div>
+                            </div>
+                            <strong>{{ class1 }} %</strong>
+                            <h3 >Non - Tumorous prediction</h3>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style= "{{"width:" ~ class2 ~"% ; animation: 5s ease 0s 1 normal none running animate-positive"}}", opacity: "1"}}></div>
+                            </div>
+                        <strong>{{ class2 }} %</strong>
+                            <!-- <h3 >NOT Skin Cancer Type</h3>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style= "{{"width:" ~ class3 ~"% ; animation: 5s ease 0s 1 normal none running animate-positive"}}", opacity: "1"}}></div>
+                            </div>
+                        <strong>{{ class3 }} %</strong> -->
                             <div class="progress-wrapper">
                         <div class="progress-info">
     
                         </div>
-                        <div id="loader" class="progress">
+                        <div id="loader">
+                        LOADING
+                        <div class="progress">
+                            
                             <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%; animation: 5s ease 0s 1 normal none running animate-positive;", opacity: "1"}}></div>
+                        </div>
                         </div>
                     </div>
                         </div>
