@@ -350,4 +350,4 @@ def brainTumor():
     # return render_template("complete_display_image.html",image_name=filename,class1=class1,class2=class2)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=8080)
