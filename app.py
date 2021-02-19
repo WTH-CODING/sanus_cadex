@@ -284,7 +284,7 @@ def brain():
 
 @app.route('/brain/predict', methods=['GET', 'POST'])
 def brainTumor(): 
-    target = os.path.join(APP_ROOT, 'images/')
+    target = os.path.join(APP_ROOT, 'static/')
     print(target)
     if not os.path.isdir(target):
             os.mkdir(target)
@@ -304,7 +304,7 @@ def brainTumor():
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     # Replace this with the path to your image
-    folder='images'
+    folder='static'
     ex=folder+'/'+filename
     image = Image.open(ex)
     img=cv2.imread(ex)
@@ -340,13 +340,13 @@ def brainTumor():
     class1=round(prediction[0][0]*100,2)
     class2=round(prediction[0][1]*100,2)    
     img = watershed(ex)
-    print(filename)
+    print(filename.split(".")[0]+'_rgb.jpg')
     print(class1,class2)
     # if class1 < 90:
     #     return "This image is NOT Tumorous."
     # elif class1 >= 90:  # Convert to string
     #     return "Warning! This image is tumorous. Scan is "+ str(class1) +"% tumorous and "+ str(class2) +"% non-tumorous"
-    return render_template("brain/result.html",image_name=filename,class1=class1,class2=class2)    
+    return render_template("brain/result.html",org_name=filename,class1=class1,class2=class2, wts_name=img)    
     # return render_template("complete_display_image.html",image_name=filename,class1=class1,class2=class2)
 
 if __name__ == '__main__':

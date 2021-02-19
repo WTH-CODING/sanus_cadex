@@ -21,8 +21,9 @@ def watershed(fileName):
     Img[markers == -1] = [255, 0, 0]
     tumorImage = cv.cvtColor(Img, cv.COLOR_HSV2BGR)
     ws = Image.fromarray(tumorImage, 'RGB')
-    ws.save("static/"+ str(fileName.split("/")[-1]))
+    ws.save("static/"+ str(fileName.split("/")[-1].split(".")[0])+'_rgb.jpg')
     # ws.show()
+    return str(fileName.split("/")[-1].split(".")[0])+'_rgb.jpg'
     # return ws
     # cv.imshow('tumor_image',tumorImage)
     # k=cv.waitKey(0)
