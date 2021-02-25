@@ -12,6 +12,36 @@
 
 
     <title>JAAGRAT</title>
+    <style>
+        .legend {
+          list-style: none;
+        }
+        .legend li {
+            float: left;
+        margin-right: 10px;
+        font-family: "Nunito Sans", sans-serif;
+        font-weight: 600;
+        font-size: 18;
+        }
+        .legend span {
+            border: 1px solid #ccc;
+        float: left;
+        width: 16px;
+        height: 16px;        
+        border-radius: 5px;
+        margin: 4px;
+        }
+        /* your colors */
+        .legend .pink {
+          background-color: #ff00ff;
+        }
+        .legend .green {
+          background-color: #00ff88;
+        }
+        .legend .blue {
+          background-color: #0000ff;
+        }
+      </style>
 </head>
 <body>
 
@@ -105,8 +135,19 @@
                         </div>
                         </div>
                         </div>
-                        <div class="card-body p-4 p-sm-5">
-                            <div class="d-flex px-3">
+                        <br>
+                        <br>
+
+                        <div style="display: flex;
+                        justify-content: center;"><table border="0px" >     
+      <ul class="legend">
+        <li><span class="green"></span> Most Severe</li>
+        <li><span class="blue"></span> Mildly Severe</li>
+        <li><span class="pink"></span> Least Severe</li>
+      </ul>
+    </table></div>     
+                        <div class="card-body p-4 p-sm-5">                                                       
+                            <div class="d-flex px-3">                                
                                 <div class="pl-md-5 pl-sm-4 text-center">
                                     <h3 class="h5">Result:</h3>
                                     <h3 class="text-success" id="result"></h3>
@@ -121,11 +162,11 @@
                                         <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style= "{{"width:" ~ class2 ~"% ; animation: 5s ease 0s 1 normal none running animate-positive"}}", opacity: "1"}}></div>
                                     </div>
                                 <strong>{{ class2 }} %</strong>
-                                    <!-- <h3 >NOT Skin Cancer Type</h3>
+                                    <h3 >Not A Brain MRI</h3>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style= "{{"width:" ~ class3 ~"% ; animation: 5s ease 0s 1 normal none running animate-positive"}}", opacity: "1"}}></div>
                                     </div>
-                                <strong>{{ class3 }} %</strong> -->
+                                <strong>{{ class3 }} %</strong>
                                     <div class="progress-wrapper">
                                 <div class="progress-info">
             

@@ -300,7 +300,7 @@ def brainTumor():
         print ("Save it to:", destination)
         upload.save(destination)
     # Load the model
-    model = tf.keras.models.load_model('./model/Best_Model.h5',compile=False)
+    model = tf.keras.models.load_model('./model/keras_model.h5',compile=False)
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     # Replace this with the path to your image
@@ -339,15 +339,16 @@ def brainTumor():
     print(prediction)
     class1=round(prediction[0][0]*100,2)
     class2=round(prediction[0][1]*100,2)    
+    class3=round(prediction[0][2]*100,2)   
     WTSNAME = watershed(ex)
     print(filename)
     print(WTSNAME)
-    print(class1,class2)
+    print(class1,class2,class3)
     # if class1 < 90:
     #     return "This image is NOT Tumorous."
     # elif class1 >= 90:  # Convert to string
     #     return "Warning! This image is tumorous. Scan is "+ str(class1) +"% tumorous and "+ str(class2) +"% non-tumorous"
-    return render_template("brain/result.html",org_name=filename,class1=class1,class2=class2, wts_name=WTSNAME)    
+    return render_template("brain/result.html",org_name=filename,class1=class1,class2=class2,class3=class3, wts_name=WTSNAME)    
     # return render_template("complete_display_image.html",image_name=filename,class1=class1,class2=class2)
 
 if __name__ == '__main__':
